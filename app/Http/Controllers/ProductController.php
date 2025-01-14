@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Chirp;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
-class ChirpController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(): View
     {
-        return view('chirps.index', [
-            'chirps' => Chirp::with('user')->latest()->get(),
+        return view('products.myProducts', [
+            'products' => Product::with('user')->latest()->get(),
         ]);
     }
 
@@ -37,7 +34,7 @@ class ChirpController extends Controller
         $validated = $request->validate([
             'message' => 'required|string|max:255',
         ]);
-
+        
         $request->user()->chirps()->create($validated);
  
         return redirect(route('chirps.index'));
@@ -46,7 +43,7 @@ class ChirpController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Chirp $chirp)
+    public function show(Product $product)
     {
         //
     }
@@ -54,40 +51,24 @@ class ChirpController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Chirp $chirp): View
+    public function edit(Product $product)
     {
-        Gate::authorize('update', $chirp);
- 
-        return view('chirps.edit', [
-            'chirp' => $chirp,
-        ]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Chirp $chirp): RedirectResponse
+    public function update(Request $request, Product $product)
     {
-        Gate::authorize('update', $chirp);
- 
-        $validated = $request->validate([
-            'message' => 'required|string|max:255',
-        ]);
- 
-        $chirp->update($validated);
- 
-        return redirect(route('chirps.index'));
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Chirp $chirp): RedirectResponse
+    public function destroy(Product $product)
     {
-        Gate::authorize('delete', $chirp);
- 
-        $chirp->delete();
- 
-        return redirect(route('chirps.index'));
+        //
     }
 }
