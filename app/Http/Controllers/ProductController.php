@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -32,12 +33,24 @@ class ProductController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'message' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'category' => 'required|string|max:255',
+            'deadline' => 'nullable|date',
+            // 'loaner_id' => 'required|string|max:255',
+            // 'status' => 'required|string|in:available,borrowed',
+            'image_path' => 'nullable|string|max:2048',
         ]);
         
-        $request->user()->chirps()->create($validated);
+        $validated['user_id'] = auth()->id();
+
+        Product::create($validated);
+
+        // $request->user()->products()->create($validated);
  
-        return redirect(route('chirps.index'));
+        return redirect(route('products.index'));
+
+        // return redirect()->route('products.index');
     }
 
     /**
