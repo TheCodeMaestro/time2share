@@ -36,7 +36,7 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'category' => 'required|string|max:255',
-            'deadline' => 'nullable|date',
+            'deadline' => 'required|date',
             // 'loaner_id' => 'required|string|max:255',
             // 'status' => 'required|string|in:available,borrowed',
             'image_path' => 'nullable|string|max:2048',
