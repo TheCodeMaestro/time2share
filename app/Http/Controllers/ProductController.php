@@ -39,9 +39,16 @@ class ProductController extends Controller
             'deadline' => 'required|date',
             // 'loaner_id' => 'required|string|max:255',
             // 'status' => 'required|string|in:available,borrowed',
-            'image_path' => 'nullable|string|max:2048',
+            'image_path' => 'sometimes|nullable|string|max:2048',
         ]);
-        
+
+        if ($request->hasFile('image_path')) {
+            $path = $request->file('image_path')->store('images', 'public'); // Store in storage/app/public/images
+            $validated['image_path'] = $path;
+        } else {
+            $validated['image_path'] = null;
+        }
+
         $validated['user_id'] = auth()->id();
 
         Product::create($validated);
@@ -49,8 +56,6 @@ class ProductController extends Controller
         // $request->user()->products()->create($validated);
  
         return redirect(route('products.index'));
-
-        // return redirect()->route('products.index');
     }
 
     /**
@@ -80,8 +85,12 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product): RedirectResponse
     {
-        //
+        Gate::authorize('delete', $product);
+ 
+        $product->delete();
+ 
+        return redirect(route('products.index'));
     }
 }

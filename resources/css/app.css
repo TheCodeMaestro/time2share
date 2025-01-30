@@ -2,14 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+p {
+  color: #1f2937;
+}
+
+h2 {
+  color: #1f2937;
+  font-size: 30px;
+}
+
+.product-container-tijdelijk {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+
+  /* @media (min-width: 640px) {
+      padding: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+      padding: 2rem;
+  } */
+}
+
 .inputfield {
     display: block;
     width: 100%;
+    margin-bottom: 20px;
     border: 1px solid #d1d5db; /* border-gray-300 */
     border-radius: 0.375rem; /* rounded-md */
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05); /* shadow-sm */
     transition: border-color 0.2s, box-shadow 0.2s;
   }
+
+  /* overflow: hidden;
+  height: auto; */
   
   .inputfield:focus {
     border-color: #a5b4fc; /* focus:border-indigo-300 */
