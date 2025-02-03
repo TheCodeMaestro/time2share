@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Log;
@@ -46,15 +47,10 @@ class ProductController extends Controller
 
         if ($request->hasFile('image_path')) {
             $path = $request->file('image_path')->store('images', 'public'); // Store in storage/app/public/images
-            // 'images', 'app'
-            Log::info('Uploaded image path: ' . $path);
             $validated['image_path'] = $path;
         } else {
             $validated['image_path'] = null;
-            Log::error('Geen image path');
         }
-
-        Log::info("If/else gebeurd niet");
 
         $validated['user_id'] = auth()->id();
 
@@ -94,7 +90,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product): RedirectResponse
     {
-        // Gate::authorize('delete', $product);
+        Gate::authorize('delete', $product);
  
         $product->delete();
  
