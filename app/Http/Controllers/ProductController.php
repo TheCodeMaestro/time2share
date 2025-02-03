@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -39,15 +41,20 @@ class ProductController extends Controller
             'deadline' => 'required|date',
             // 'loaner_id' => 'required|string|max:255',
             // 'status' => 'required|string|in:available,borrowed',
-            'image_path' => 'sometimes|nullable|string|max:2048',
+            'image_path' => 'sometimes|nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         if ($request->hasFile('image_path')) {
             $path = $request->file('image_path')->store('images', 'public'); // Store in storage/app/public/images
+            // 'images', 'app'
+            Log::info('Uploaded image path: ' . $path);
             $validated['image_path'] = $path;
         } else {
             $validated['image_path'] = null;
+            Log::error('Geen image path');
         }
+
+        Log::info("If/else gebeurd niet");
 
         $validated['user_id'] = auth()->id();
 
@@ -87,7 +94,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product): RedirectResponse
     {
-        Gate::authorize('delete', $product);
+        // Gate::authorize('delete', $product);
  
         $product->delete();
  

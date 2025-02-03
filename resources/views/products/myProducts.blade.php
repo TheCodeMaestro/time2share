@@ -12,9 +12,15 @@
                                     <p>Description: {{ $product->description }}</p>
                                     <p>Status: {{ $product->status }}</p>
                                     <p>Owner: {{ $product->user->name }}</p>
-                                    <!-- <p>{{ $product->image_path }}</p> -->
-                                    <img src="{{ $product->image_path }}" alt="Girl in a jacket">
+                                    @if($product->image_path)
+                                        <img src="{{ asset('storage/' . $product->image_path) }}" alt="Product Image">
+                                    @endif
                                     <small class="text-sm text-gray-600">Posted on: {{ $product->created_at->format('j M Y, g:i a') }}</small>
+                                    <form method="POST" action="{{ route('products.destroy', $product->id) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <x-primary-button class="mt-4">Delete product</x-primary-button>
+                                    </form>
                                 </section>
                             </section>
                         </section>
@@ -33,8 +39,10 @@
             </section>
             <section>
                 <label for="description">Description </label>
-                <input id="description" name="description" type="text" placeholder="A description of your product" 
-                class="inputfield">
+                <textarea id="description" name="description" placeholder="A description of your product" 
+                class="inputfield" rows="4" cols="50"></textarea>
+                <!-- <input id="description" name="description" type="text" placeholder="A description of your product" 
+                class="inputfield"> -->
             </section>
             <section>
                 <label for="category">Category </label>
@@ -48,10 +56,11 @@
             </section>
             <section>
                 <label for="image">Product image </label><br>
-                <input id="image" name="image_path" type="file" accept=".jpg, .jpeg, .png" placeholder="A image of your product">
+                <input id="image" name="image_path" type="file" placeholder="A image of your product">
             </section>
             <x-input-error :messages="$errors->get('message')" class="mt-2" />
             <x-primary-button class="mt-4">{{ __('Post product') }}</x-primary-button>
         </form>
     </section>    
 </x-app-layout>
+<!-- accept=".jpg, .jpeg, .png" -->
