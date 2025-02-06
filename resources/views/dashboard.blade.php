@@ -4,6 +4,13 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
+    <section>
+        <!-- @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif -->
+    </section>
     @foreach ($products as $product)
         <section class="product-box">
             <section class="product-header1">
@@ -17,10 +24,11 @@
             </section>
             <section class="product-description">
                 <p>{{ $product->description }}</p>
-                <form action="{{ route('products.loan', '$product->id') }}" method="POST">
+                <form action="{{ route('products.loan', $product->id) }}" method="POST">
                     @csrf
                     <button type="submit" class="primary-button" style="margin: 4px 0px">Loan Product</button>
                 </form>
+                <!-- <p>{{ route('products.loan', $product->id) }}</p> -->
             </section>
             <section class="product-image">
                 @if($product->image_path)
@@ -31,4 +39,12 @@
             </section>
         </section>  
     @endforeach
+    <!-- <section>
+
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+    </section> -->
 </x-app-layout>

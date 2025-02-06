@@ -31,15 +31,15 @@ class ProductController extends Controller
 
     public function loan(Request $request, Product $product): RedirectResponse
     {   
-        if (!$product) {
-            return redirect()->route('products.dashboard')->with('error', 'Product not found.');
-        }
+        // if (!$product) {
+        //     return redirect()->route('dashboard')->with('error', 'Product not found.');
+        // }
 
         $product->update([
             'loaner_id' => auth()->id(),
             'status' => 'borrowed']);
-
-        return redirect()->back()->with('success', 'Product loaned successfully!');
+            
+        return redirect()->route('dashboard')->with('success', 'Product loaned successfully!');
     }
 
     /**

@@ -25,6 +25,6 @@ Route::resource('products', ProductController::class)
     ->only(['index', 'dashboard', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 
-Route::post('/products/{id}/loan', [ProductController::class, 'loan'])->name('products.loan');
+Route::post('/products/{product}/loan', [ProductController::class, 'loan'])->name('products.loan');
 
 require __DIR__.'/auth.php';
