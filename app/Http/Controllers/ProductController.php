@@ -22,6 +22,26 @@ class ProductController extends Controller
         ]);
     }
 
+    public function dashboard(): View
+    {
+        return view('dashboard', [
+            'products' => Product::with('user')->latest()->get(),
+        ]);
+    }
+
+    public function loan(Request $request, Product $product): RedirectResponse
+    {   
+        if (!$product) {
+            return redirect()->route('products.dashboard')->with('error', 'Product not found.');
+        }
+
+        $product->update([
+            'loaner_id' => auth()->id(),
+            'status' => 'borrowed']);
+
+        return redirect()->back()->with('success', 'Product loaned successfully!');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -46,7 +66,7 @@ class ProductController extends Controller
         ]);
 
         if ($request->hasFile('image_path')) {
-            $path = $request->file('image_path')->store('images', 'public'); // Store in storage/app/public/images
+            $path = $request->file('image_path')->store('images', 'public'); // Storage/app/public/images
             $validated['image_path'] = $path;
         } else {
             $validated['image_path'] = null;
