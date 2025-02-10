@@ -24,11 +24,12 @@
             </section>
             <section class="product-description">
                 <p>{{ $product->description }}</p>
-                <form action="{{ route('products.loan', $product->id) }}" method="POST">
-                    @csrf
-                    <button type="submit" class="primary-button" style="margin: 4px 0px">Loan Product</button>
-                </form>
-                <!-- <p>{{ route('products.loan', $product->id) }}</p> -->
+                @if($product->owner != Auth::user())
+                    <form action="{{ route('products.loan', $product->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="primary-button" style="margin: 4px 0px">Loan Product</button>
+                    </form>
+                @endif
             </section>
             <section class="product-image">
                 @if($product->image_path)
@@ -39,8 +40,20 @@
             </section>
         </section>  
     @endforeach
+    <button class="primary-button" type="button" onclick="openConfirmation()">open confirmation</button>
+    <section class="confirmation-popup" id="confirmation" onclick="closeConfirmation()">
+        <p>test</p>
+    </section>
+    <script>
+        function openConfirmation() {
+            document.getElementById("confirmation").style.display = "block";
+        }
+  
+        function closeConfirmation() {
+            document.getElementById("confirmation").style.display = "none";
+        }
+    </script>
     <!-- <section>
-
         @if(session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
