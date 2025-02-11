@@ -1,4 +1,5 @@
 import './bootstrap';
+import './time2share.js';
 
 import Alpine from 'alpinejs';
 

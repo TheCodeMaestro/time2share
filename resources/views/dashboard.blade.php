@@ -4,6 +4,13 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
+    <!-- <section id="confirmation" class="overlay">
+        <section class="confirmation-popup">
+            <p>Weet je zeker dat je dit product wilt lenen?</p>
+            <button class="secondary-button" type="button" onclick="closeConfirmation()">Cancel</button>
+            <button class="primary-button" type="button" onclick="closeConfirmation()">Confirm</button>
+        </section>
+    </section> -->
     <section>
         <!-- @if(session('success'))
             <div class="alert alert-success">
@@ -13,6 +20,11 @@
     </section>
     @foreach ($products as $product)
         <section class="product-box">
+            <section class="confirmation-popup">
+                <p>Are you sure that you want to loan this product?</p>
+                <button class="secondary-button" type="button" onclick="closeConfirmation()">Cancel</button>
+                <button class="primary-button" type="button" onclick="closeConfirmation()">Confirm</button>
+            </section>
             <section class="product-header1">
                 <h2>{{ $product->name }}</h2>
                 <p>Category: {{ $product->category }} | Deadline: {{ $product->deadline }}</p>
@@ -41,18 +53,10 @@
         </section>  
     @endforeach
     <button class="primary-button" type="button" onclick="openConfirmation()">open confirmation</button>
-    <section class="confirmation-popup" id="confirmation" onclick="closeConfirmation()">
+    <!-- <section class="confirmation-popup" id="confirmation" onclick="closeConfirmation()">
         <p>test</p>
-    </section>
-    <script>
-        function openConfirmation() {
-            document.getElementById("confirmation").style.display = "block";
-        }
-  
-        function closeConfirmation() {
-            document.getElementById("confirmation").style.display = "none";
-        }
-    </script>
+    </section> -->
+    <!-- <script src="time2share.js"></script> -->
     <!-- <section>
         @if(session('error'))
             <div class="alert alert-danger">
