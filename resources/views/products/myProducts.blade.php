@@ -1,9 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">My products</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Pending products</h2>
+        <button onclick="newProduct()" type="button">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">New product</h2>
+        </button>
     </x-slot>
     @foreach ($products as $product)
-        @if($product->owner->is(Auth::user()))
+        @if($product->owner->is(Auth::user()) Or $product->loaner_id == Auth::user()->id)
             <section class="product-box">
                 <section class="product-header1">
                     <h2>{{ $product->name }}</h2>
@@ -35,6 +39,31 @@
                 </section>
                 <section class="product-description">
                     <p>{{ $product->description }}</p>
+                    @if($product->loaner_id == Auth::user()->id And $product->status != "pending")
+                        <form action="{{ route('products.return', $product->id) }}" method="POST">
+                            @csrf
+                            <button type="button" class="primary-button" style="margin: 4px 0px" onclick="openConfirmation({{ $product->id }})">Return product</button>
+                            <section id="{{ $product->id }}" class="confirmation-popup">
+                                <p>Are you sure that you want to return this product?<br>
+                                You have until <b>{{$product->deadline}}</b> to return the product.<br>
+                                <button class="secondary-button" type="button" style="margin-top: 0.25rem" onclick="closeConfirmation({{ $product->id }})">Cancel</button>
+                                <button class="primary-button" type="submit" style="margin-top: 0.25rem">Confirm</button>
+                                </p>
+                            </section>
+                        </form>
+                    @endif
+                    @if($product->owner->is(Auth::user()) And $product->status == "pending")
+                        <form action="{{ route('products.accept', $product->id) }}" method="POST">
+                            @csrf
+                            <button type="button" class="primary-button" style="margin: 4px 0px" onclick="openConfirmation({{ $product->id }})">Accept return</button>
+                            <section id="{{ $product->id }}" class="confirmation-popup">
+                                <p>Are you sure that you want to accept the return of this product?<br>
+                                <button class="secondary-button" type="button" style="margin-top: 0.25rem" onclick="closeConfirmation({{ $product->id }})">Cancel</button>
+                                <button class="primary-button" type="submit" style="margin-top: 0.25rem">Confirm</button>
+                                </p>
+                            </section>
+                        </form>
+                    @endif
                 </section>
                 <section class="product-image">
                     @if($product->image_path)
@@ -46,36 +75,40 @@
             </section>
         @endif    
     @endforeach
-
-    <section class="product-form-tijdelijk">
-        <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
-            @csrf
-            <section>
-                <label for="name">Name </label>
-                <input id="name" name="name" type="text" maxlength="255" placeholder="The name of your product" 
-                required class="inputfield">
-            </section>
-            <section>
-                <label for="description">Description </label>
-                <textarea id="description" name="description" placeholder="A description of your product" 
-                class="inputfield" rows="4" cols="50"></textarea>
-            </section>
-            <section>
-                <label for="category">Category </label>
-                <input id="category" name="category" type="text" placeholder="The category your product falls under" 
-                required class="inputfield">
-            </section>
-            <section>
-                <label for="deadline">Deadline </label>
-                <input id="deadline" name="deadline" type="date" placeholder="The date your product needs to be returned" 
-                required class="inputfield">
-            </section>
-            <section>
-                <label for="image">Product image </label><br>
-                <input id="image" name="image_path" type="file" placeholder="A image of your product">
-            </section>
-            <x-input-error :messages="$errors->get('message')" class="mt-2" />
-            <button class="primary-button" style="margin-top: 20px">{{ __('Post product') }}</button>
-        </form>
-    </section>    
+    <section class="overlay" id="overlay">
+        <section class="product-form">
+            <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
+                @csrf
+                <section>
+                    <label for="name">Name </label>
+                    <input id="name" name="name" type="text" maxlength="255" placeholder="The name of your product" 
+                    required class="inputfield">
+                </section>
+                <section>
+                    <label for="description">Description </label>
+                    <textarea id="description" name="description" placeholder="A description of your product" 
+                    class="inputfield" rows="4" cols="50"></textarea>
+                </section>
+                <section>
+                    <label for="category">Category </label>
+                    <input id="category" name="category" type="text" placeholder="The category your product falls under" 
+                    required class="inputfield">
+                </section>
+                <section>
+                    <label for="deadline">Deadline </label>
+                    <input id="deadline" name="deadline" type="date" placeholder="The date your product needs to be returned" 
+                    required class="inputfield">
+                </section>
+                <section>
+                    <label for="image">Product image </label><br>
+                    <input id="image" name="image_path" type="file" placeholder="A image of your product">
+                </section>
+                <x-input-error :messages="$errors->get('message')" class="mt-2" />
+                <section class="space-between">
+                    <button class="secondary-button" type="button" style="margin-top: 20px" onclick="closeNewProduct()">cancel</button>
+                    <button class="primary-button" type="submit" style="margin-top: 20px">{{ __('Post product') }}</button>
+                </section>
+            </form>
+        </section>    
+    </section>
 </x-app-layout>
