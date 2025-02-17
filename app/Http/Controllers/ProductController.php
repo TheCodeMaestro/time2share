@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): View
     {
         return view('products.myProducts', [
@@ -26,6 +23,15 @@ class ProductController extends Controller
     {
         return view('dashboard', [
             'products' => Product::with('user')->latest()->get(),
+        ]);
+    }
+
+    public function showPendingProducts(): View
+    {   
+        $products = Product::with('user')->where('status', 'pending')->latest()->get();
+
+        return view('products.myProducts', [
+            'products' => $products,
         ]);
     }
 
@@ -41,7 +47,6 @@ class ProductController extends Controller
     public function return(Request $request, Product $product): RedirectResponse
     {   
         $product->update([
-            // 'loaner_id' => null, //Tijdelijk voor testen, moet weg gehaald worden
             'status' => 'pending']);
             
         return redirect()->route('products.index')->with('success', 'Product is pending!');
@@ -64,14 +69,11 @@ class ProductController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'description' => 'nullable|string|max:1000',
             'category' => 'required|string|max:255',
             'deadline' => 'required|date',
             // 'loaner_id' => 'required|string|max:255',
@@ -119,9 +121,6 @@ class ProductController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Product $product): RedirectResponse
     {
         Gate::authorize('delete', $product);

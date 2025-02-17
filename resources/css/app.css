@@ -12,6 +12,7 @@ h2 {
 }
 
 .header {
+  height: 5rem;
   display: flex;
   max-width: 80rem;
   margin-left: auto;
@@ -21,10 +22,12 @@ h2 {
   padding-left: 1rem;
   padding-right: 1rem;
   justify-content: center;
+  /* align-items: center; */
+  /* flex-grow: 0; */
   gap: 10rem;
 }
 
-@media (min-width: 640px) {
+/* @media (min-width: 640px) {
   .header {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -36,7 +39,7 @@ h2 {
     padding-left: 2rem;
     padding-right: 2rem;
   }
-}
+} */
 
 .space-between {
   display: flex;
@@ -86,8 +89,8 @@ h2 {
   grid-template-columns: 65% 35%;
   grid-template-rows: 5rem auto;
   border-radius: 8px;
-  padding: 4px;
-  row-gap: 4px;
+  padding: 2px;
+  row-gap: 3px;
   width: 900px;
   background-color: #bcbebf;
   margin-inline: auto;
@@ -97,16 +100,16 @@ h2 {
 
 .product-header1 {
   grid-area: header1;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
   background-color: white;
   padding-left: 10px;
 }
 
 .product-header2 {
   grid-area: header2;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
   background-color: white;
   padding-left: 5px;
   padding-top: 4px;
@@ -116,8 +119,8 @@ h2 {
 
 .product-description {
   grid-area: description;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
   background-color: white;
   padding-left: 10px;
   padding-top: 4px;
@@ -129,8 +132,8 @@ h2 {
 
 .product-image {
   grid-area: image;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
   background-color: rgb(244, 244, 244);
   display: flex;
   justify-content: center;
@@ -148,7 +151,7 @@ h2 {
   width: 100%;
   margin-bottom: 20px;
   resize: none;
-  border: 4px solid #bcbebf;
+  border: 2px solid #bcbebf;
   border-radius: 8px;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -265,6 +268,29 @@ label {
   .secondary-button:active {
       background-color: #e0e0e0;
       border-color: #777;
+  }
+
+.header-button {
+  height: 100%;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #2d3748;
+  line-height: 1.375;
+}
+
+  .header-button:hover {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: black;
+    border-bottom: 2px solid #bcbebf;
+  }
+
+  .header-button:focus {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: black;
+    line-height: 1.375;
+    border-bottom: 2px solid black;
   }
 
 .options-icon {

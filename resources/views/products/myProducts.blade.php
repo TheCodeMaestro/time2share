@@ -1,10 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">My products</h2>
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Pending products</h2>
-        <button onclick="newProduct()" type="button">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">New product</h2>
-        </button>
+        <button type="button" class="header-button" onclick="window.location.href='{{ route('products.index') }}'">My products</button>
+        <button type="button" class="header-button" onclick="window.location.href='{{ route('showPendingProducts') }}'">Pending products</button>
+        <button onclick="newProduct()" type="button" class="header-button">New product</button>
     </x-slot>
     @foreach ($products as $product)
         @if($product->owner->is(Auth::user()) Or $product->loaner_id == Auth::user()->id)
