@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Review;
 use App\Models\Product;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ReviewController extends Controller
 {
@@ -29,22 +31,29 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Product $product, Request $request): RedirectResponse
-    {
+    public function store(Request $request): RedirectResponse
+    {   
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'message' => 'nullable|string|max:1000',
             'score' => 'required|integer|min:1|max:5',
+            'product_id' => 'nullable|exists:products,id'
         ]);
+
+        $product = Product::find($validated['product_id']);
+        if (!$product) {
+            dd('Product niet gevonden', $validated['product_id']);
+        }
         
         $validated['reviewer_id'] = auth()->id();
         $validated['reviewed_user_id'] = $product->loaner_id;
 
         Review::create($validated);
 
-        $this->accept($product);
+        $productController = app(ProductController::class);
+        $productController->accept($product);
 
-        return redirect()->route('products.index');
+        return redirect()->route('showPendingProducts');
     }
 
     /**

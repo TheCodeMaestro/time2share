@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('message')->nullable();
+            $table->foreignId('product_id')->nullable()->constrained('products')->onDelete('set null');
             $table->foreignId('reviewer_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('reviewed_user_id')->constrained('users')->onDelete('cascade');
-            $table->unsignedInt('score');
+            $table->unsignedInteger('score');
             $table->timestamps();
         });
     }

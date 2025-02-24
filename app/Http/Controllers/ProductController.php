@@ -52,7 +52,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product is pending!');
     }
 
-    public function accept(Request $request, Product $product): RedirectResponse
+    public function accept(Product $product): RedirectResponse
     {   
         $product->update([
             'loaner_id' => null,

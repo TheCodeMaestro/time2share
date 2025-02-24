@@ -2,7 +2,7 @@
     <x-slot name="header">
         <button type="button" class="header-button" onclick="window.location.href='{{ route('products.index') }}'">My products</button>
         <button type="button" class="header-button" onclick="window.location.href='{{ route('showPendingProducts') }}'">Pending products</button>
-        <button onclick="newProduct()" type="button" class="header-button">New product</button>
+        <button onclick="openForm('newProduct')" type="button" class="header-button">New product</button>
     </x-slot>
     @foreach ($products as $product)
         @if($product->owner->is(Auth::user()) Or $product->loaner_id == Auth::user()->id)
@@ -57,6 +57,7 @@
                             <section id="{{ $product->id }}" class="confirmation-popup">
                                 <p>Are you sure that you want to accept the return of this product?<br>
                                 <button class="secondary-button" type="button" style="margin-top: 0.25rem" onclick="closeConfirmation({{ $product->id }})">Cancel</button>
+                                <button class="secondary-button" type="button" style="margin-top: 0.25rem" onclick="openForm('newReview', {{ $product->id }})">Confirm + review</button>
                                 <button class="primary-button" type="submit" style="margin-top: 0.25rem">Confirm</button>
                                 </p>
                             </section>
@@ -74,7 +75,7 @@
         @endif    
     @endforeach
     <section class="overlay" id="overlay">
-        <section class="product-form">
+        <section class="product-form" id="newProduct">
             <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
                 @csrf
                 <section>
@@ -103,9 +104,44 @@
                 </section>
                 <x-input-error :messages="$errors->get('message')" class="mt-2" />
                 <section class="space-between">
-                    <button class="secondary-button" type="button" style="margin-top: 20px" onclick="closeNewProduct()">cancel</button>
+                    <button class="secondary-button" type="button" style="margin-top: 20px" onclick="closeForm('newProduct')">cancel</button>
                     <button class="primary-button" type="submit" style="margin-top: 20px">{{ __('Post product') }}</button>
                 </section>
+            </form>
+        </section>
+        <section class="review-form" id="newReview">
+            <form method="POST" action="{{ route('reviews.store') }}" enctype="multipart/form-data">
+                @csrf
+                <section>
+                    <input type="hidden" name="product_id" id="product_id">
+                </section>
+                <section>
+                    <label for="title">Title</label>
+                    <input id="title" name="title" type="text" maxlength="255" placeholder="The titel of your review" 
+                    required class="inputfield">
+                </section>
+                <section>
+                    <label for="message">Review</label>
+                    <textarea id="message" name="message" placeholder="Write your review here" 
+                    class="inputfield" rows="4" cols="50"></textarea>
+                </section>
+                <p class="label">Score</p>
+                <section id=scoreInput>
+                    <input type="radio" id="one" name="score" value="1">
+                    <label for="one">1</label>
+                    <input type="radio" id="two" name="score" value="2">
+                    <label for="two">2</label>
+                    <input type="radio" id="three" name="score" value="3">
+                    <label for="three">3</label>
+                    <input type="radio" id="four" name="score" value="4">
+                    <label for="four">4</label>
+                    <input type="radio" id="five" name="score" value="5">
+                    <label for="five">5</label>
+                </section>
+                <section class="space-between">
+                    <button class="secondary-button" type="button" style="margin-top: 20px" onclick="closeForm('newReview')">cancel</button>
+                    <button class="primary-button" type="submit" style="margin-top: 20px">Post review</button>
+                </section> 
             </form>
         </section>    
     </section>

@@ -11,11 +11,12 @@ class Review extends Model
     use HasFactory;
 
     protected $fillable = [
-        $table->string('titel');
-        $table->text('message')->nullable();
-        $table->foreignId('reviewer_id')->constrained('users')->onDelete('cascade');
-        $table->foreignId('reviewed_user_id')->constrained('users')->onDelete('cascade');
-        $table->unsignedInt('score');
+        'title',
+        'message',
+        'product_id',
+        'reviewer_id',
+        'reviewed_user_id',
+        'score',
     ];
 
     public function reviewer()
@@ -26,5 +27,10 @@ class Review extends Model
     public function reviewedUser()
     {
         return $this->belongsTo(User::class, 'reviewed_user_id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id')->withDefault();
     }
 }
