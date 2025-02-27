@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Review; //tijdelijk
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,6 +17,7 @@ class ProductController extends Controller
     {
         return view('products.myProducts', [
             'products' => Product::with('user')->latest()->get(),
+            'reviews' => Review::with('reviewedUser')->get() //tijdelijk
         ]);
     }
 

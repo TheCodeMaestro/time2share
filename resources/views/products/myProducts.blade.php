@@ -143,6 +143,27 @@
                     <button class="primary-button" type="submit" style="margin-top: 20px">Post review</button>
                 </section> 
             </form>
-        </section>    
+        </section>
     </section>
+    <section>
+        @foreach ($reviews as $review)
+            <section class="review-box">
+                <section class="review-header1">
+                    <h2>{{ $review->title }}</h2>
+                    <p>Score: {{$review->score}}/5</p>
+                </section>
+                <section class="review-header2">
+                    <p>Writer: {{ $review->reviewer->name }}<br>
+                    Posted on: {{ $product->created_at->format('j M Y, g:i a') }}<br>
+                    @if($review->product_id != null)
+                        Product: {{$review->product->name}}
+                    @endif
+                    </p>
+                </section>
+                <section class="review-message">
+                    <p>{{ $review->message }}</p>
+                </section>
+            </section>
+        @endforeach
+    </section>    
 </x-app-layout>

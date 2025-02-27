@@ -133,9 +133,10 @@ h2 {
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   background-color: white;
-  padding-left: 10px;
+  padding: 4px 10px;
+  /* padding-left: 10px;
   padding-top: 4px;
-  padding-bottom: 4px;
+  padding-bottom: 4px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -155,6 +156,53 @@ h2 {
   border-radius: 3px;
   width: 100%;
   height: auto;
+}
+
+.review-box {
+  display: grid;
+  grid-template-areas:
+    'header1 header2'
+    'message message';
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 5rem auto;
+  border-radius: 8px;
+  padding: 2px;
+  row-gap: 3px;
+  width: 600px;
+  background-color: #bcbebf;
+  margin-inline: auto;
+  margin-top: 20px;
+  position: relative;
+}
+
+.review-header1 {
+  grid-area: header1;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  background-color: white;
+  padding-left: 10px;
+}
+
+.review-header2 {
+  grid-area: header2;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color: white;
+  padding-left: 5px;
+  padding-top: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-message {
+  grid-area: message;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  background-color: white;
+  padding: 4px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .inputfield {
