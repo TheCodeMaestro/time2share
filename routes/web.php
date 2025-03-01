@@ -28,7 +28,7 @@ Route::resource('reviews', ReviewController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('products', ProductController::class)
-    ->only(['index', 'dashboard', 'store', 'destroy'])
+    ->only(['index', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 Route::post('/products/{product}/loan', [ProductController::class, 'loan'])->name('products.loan');

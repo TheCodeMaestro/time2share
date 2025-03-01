@@ -14,17 +14,22 @@ use Illuminate\Support\Facades\Log;
 class ProductController extends Controller
 {
     public function index(): View
-    {
+    {   
         return view('products.myProducts', [
             'products' => Product::with('user')->latest()->get(),
-            'reviews' => Review::with('reviewedUser')->get() //tijdelijk
         ]);
     }
 
-    public function dashboard(): View
+    public function dashboard(Request $request): View
     {
+        $filter = Product::with('user')->latest();
+
+        if ($request->filled('search')) {
+            $filter->where('name', 'like', '%' . $request->search . '%')->orWhere('description', 'like', '%' . $request->search . '%');
+        }
+
         return view('dashboard', [
-            'products' => Product::with('user')->latest()->get(),
+            'products' => $filter->get(),
         ]);
     }
 

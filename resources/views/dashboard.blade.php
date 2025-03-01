@@ -1,8 +1,26 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Filters</h2>
-    </x-slot>
+    <section class="filter-header" name="header">
+        <!-- <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2> -->
+        <!-- <h2 class="font-semibold text-xl text-gray-800 leading-tight">Filters</h2> -->
+        <form method="GET" action="{{ route('dashboard') }}">
+            @csrf
+            <section style="display: inline-flex; gap: 8px; align-items: center;">
+                <input type="text" name="search" placeholder="Search here for a product..." class="inputfield" style="width: 300px; margin: 0px" value="{{ request('search') }}"/>
+                <button class="primary-button" type="submit">Search</button>
+            </section>
+        </form>
+        <form method="GET" action="{{ route('dashboard') }}">
+            @csrf
+            <section style="display: inline-flex; gap: 8px; align-items: center;">
+                <button class="primary-button" type="submit">Reset filters</button>
+            </section>
+        </form>
+    </section>
+    @if($products->isEmpty())
+        <section class="center">
+            <h2>No products have been found</h2>
+        </section>
+    @endif
     @foreach ($products as $product)
         @if($product->status == "available")
             <section class="product-box">

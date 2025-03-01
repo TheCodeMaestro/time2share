@@ -1,9 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <button type="button" class="header-button" onclick="window.location.href='{{ route('products.index') }}'">My products</button>
-        <button type="button" class="header-button" onclick="window.location.href='{{ route('showPendingProducts') }}'">Pending products</button>
+        <button type="button" class="header-button {{ request()->routeIs('products.index') ? 'active' : '' }}" onclick="window.location.href='{{ route('products.index') }}'">My products</button>
+        <button type="button" class="header-button {{ request()->routeIs('showPendingProducts') ? 'active' : '' }}" onclick="window.location.href='{{ route('showPendingProducts') }}'">Pending products</button>
         <button onclick="openForm('newProduct')" type="button" class="header-button">New product</button>
     </x-slot>
+    @if($products->isEmpty())
+        <section class="center">
+            <h2>You have no (pending) products</h2>
+        </section>
+    @endif
     @foreach ($products as $product)
         @if($product->owner->is(Auth::user()) Or $product->loaner_id == Auth::user()->id)
             <section class="product-box">
