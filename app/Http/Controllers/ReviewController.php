@@ -15,9 +15,12 @@ class ReviewController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        return view('myReviews', [
+            'reviews' => Review::with('reviewedUser')->latest()->get(),
+            'products' => Product::with('user')->get()
+        ]);
     }
 
     /**
@@ -53,7 +56,7 @@ class ReviewController extends Controller
         $productController = app(ProductController::class);
         $productController->accept($product);
 
-        return redirect()->route('showPendingProducts');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -83,8 +86,12 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Review $review)
-    {
-        //
+    public function destroy(Review $review): RedirectResponse
+    {   
+        //gate toevoegen (review policy)
+
+        $review->delete();
+ 
+        return redirect(route('reviews.index'));
     }
 }

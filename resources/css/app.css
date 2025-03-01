@@ -41,6 +41,13 @@ h2 {
   }
 } */
 
+.reviews-layout {
+  display: flex;
+  justify-content: center;
+  gap: 5vw;
+  padding-top: 10px;
+}
+
 .space-between {
   display: flex;
   justify-content: space-between;
@@ -196,10 +203,10 @@ h2 {
 
 .review-message {
   grid-area: message;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+  border-radius: 8px;
   background-color: white;
   padding: 4px 10px;
+  margin-right: 1px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

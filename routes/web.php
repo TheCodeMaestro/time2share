@@ -24,7 +24,7 @@ Route::resource('chirps', ChirpController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('reviews', ReviewController::class)
-    ->only(['store'])
+    ->only(['index', 'store', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('products', ProductController::class)
