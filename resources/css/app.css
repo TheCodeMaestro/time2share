@@ -11,6 +11,13 @@ h2 {
   font-size: 30px;
 }
 
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+}
+
 .center {
   display: flex;
   justify-content: center;

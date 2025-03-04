@@ -29,9 +29,12 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main style="padding-bottom: 20px">
                 {{ $slot }}
             </main>
         </div>
     </body>
+    <footer>
+        <h2>Powered by Laravel</h2>
+    </footer>
 </html>
