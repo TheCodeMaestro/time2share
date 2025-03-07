@@ -28,8 +28,12 @@ Route::resource('reviews', ReviewController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('products', ProductController::class)
-    ->only(['index', 'store', 'destroy'])
+    ->only(['index', 'store'])
     ->middleware(['auth', 'verified']);
+
+Route::delete('products/{product}', [ProductController::class, 'destroy'])
+    ->name('products.destroy')
+    ->middleware(['auth', 'verified', 'AdminOrProductOwner']);
 
 Route::post('/products/{product}/loan', [ProductController::class, 'loan'])->name('products.loan');
 Route::post('/products/{product}/return', [ProductController::class, 'return'])->name('products.return');

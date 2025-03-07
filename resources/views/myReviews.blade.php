@@ -67,5 +67,10 @@
                 @endif    
             @endforeach
         </section>
-    </section>    
+    </section>  
+    @if($reviews->isEmpty())
+        <section class="center">
+            <h2>You have no reviews</h2>
+        </section>
+    @endif  
 </x-app-layout>

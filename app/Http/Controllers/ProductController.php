@@ -83,8 +83,6 @@ class ProductController extends Controller
             'description' => 'nullable|string|max:1000',
             'category' => 'required|string|max:255',
             'deadline' => 'required|date',
-            // 'loaner_id' => 'required|string|max:255',
-            // 'status' => 'required|string|in:available,borrowed',
             'image_path' => 'sometimes|nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -98,8 +96,6 @@ class ProductController extends Controller
         $validated['user_id'] = auth()->id();
 
         Product::create($validated);
-
-        // $request->user()->products()->create($validated);
  
         return redirect(route('products.index'));
     }
@@ -130,10 +126,9 @@ class ProductController extends Controller
 
     public function destroy(Product $product): RedirectResponse
     {
-        Gate::authorize('delete', $product);
- 
         $product->delete();
  
         return redirect(route('products.index'));
     }
 }
+// Gate::authorize('delete', $product);

@@ -94,10 +94,15 @@
                     class="inputfield" rows="4" cols="50"></textarea>
                 </section>
                 <section>
-                    <label for="category">Category </label>
-                    <input id="category" name="category" type="text" placeholder="The category your product falls under" 
-                    required class="inputfield">
-                </section>
+                    <label for="category">Category</label><br>
+                    <select id="category" name="category" class="inputfield">
+                      <option value="Gereedschap">Gereedschap</option>
+                      <option value="Speelgoed">Speelgoed</option>
+                      <option value="Meubel">Meubel</option>
+                      <option value="Keuken apparatuur">Keuken apparatuur</option>
+                      <option value="Anders" selected>Anders</option>
+                    </select>
+                </section>    
                 <section>
                     <label for="deadline">Deadline </label>
                     <input id="deadline" name="deadline" type="date" placeholder="The date your product needs to be returned" 
