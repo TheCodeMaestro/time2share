@@ -71,7 +71,7 @@
                 </section>
                 <section class="product-image">
                     @if($product->image_path)
-                        <img src="{{ asset('storage/' . $product->image_path) }}" alt="Product Image">
+                        <img src="{{ $product->image_path }}" alt="Product Image">
                     @else
                         <h2>No image available</h2>
                     @endif

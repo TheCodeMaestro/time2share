@@ -28,6 +28,10 @@ class ProductController extends Controller
             $filter->where('name', 'like', '%' . $request->search . '%')->orWhere('description', 'like', '%' . $request->search . '%');
         }
 
+        if ($request->filled('category')) {
+            $filter->where('category', 'like', $request->category);
+        }
+
         return view('dashboard', [
             'products' => $filter->get(),
         ]);
@@ -125,10 +129,10 @@ class ProductController extends Controller
     }
 
     public function destroy(Product $product): RedirectResponse
-    {
+    {   
+        // Gate::authorize('delete', $product);
         $product->delete();
  
-        return redirect(route('products.index'));
+        return back();
     }
 }
-// Gate::authorize('delete', $product);

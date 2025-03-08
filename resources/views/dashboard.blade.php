@@ -4,15 +4,30 @@
         <!-- <h2 class="font-semibold text-xl text-gray-800 leading-tight">Filters</h2> -->
         <form method="GET" action="{{ route('dashboard') }}">
             @csrf
-            <section style="display: inline-flex; gap: 8px; align-items: center;">
-                <input type="text" name="search" placeholder="Search here for a product..." class="inputfield" style="width: 300px; margin: 0px" value="{{ request('search') }}"/>
-                <button class="primary-button" type="submit">Search</button>
+            <section class="filter">
+                <section>
+                    <input type="text" name="search" placeholder="Search here for a product..." class="inputfield" style="width: 300px; margin: 0px" value="{{ request('search') }}"/>
+                </section>
+                <section style="display: inline-flex; align-items: center;">
+                    <section class="label">Category:</section>
+                    <select id="category" name="category" class="inputfield" style="margin-left: 0.5rem; margin-bottom: 0rem;" placeholder="test">
+                        <option selected>Choose a category</option>
+                        <option value="Gereedschap">Gereedschap</option>
+                        <option value="Speelgoed">Speelgoed</option>
+                        <option value="Meubel">Meubel</option>
+                        <option value="Keuken apparatuur">Keuken apparatuur</option>
+                        <option value="Anders">Anders</option>
+                    </select>
+                </section>
+                <section>
+                    <button class="primary-button" type="submit">Search</button>
+                </section>
             </section>
         </form>
         <form method="GET" action="{{ route('dashboard') }}">
             @csrf
-            <section style="display: inline-flex; gap: 8px; align-items: center;">
-                <button class="primary-button" type="submit">Reset filters</button>
+            <section>
+                <button class="secondary-button" type="submit">Reset filters</button>
             </section>
         </form>
     </section>
@@ -72,7 +87,7 @@
                 </section>
                 <section class="product-image">
                     @if($product->image_path)
-                        <img src="{{ asset('storage/' . $product->image_path) }}" alt="Product Image">
+                        <img src="{{ $product->image_path }}" alt="Product Image">
                     @else
                         <h2>No image available</h2>
                     @endif
