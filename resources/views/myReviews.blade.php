@@ -70,7 +70,7 @@
     </section>  
     @if($reviews->isEmpty())
         <section class="center">
-            <h2>You have no reviews</h2>
+            <h2><i>You have no reviews</i></h2>
         </section>
     @endif  
 </x-app-layout>

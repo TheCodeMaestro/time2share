@@ -33,7 +33,7 @@
     </section>
     @if($products->isEmpty())
         <section class="center">
-            <h2>No products have been found</h2>
+            <h2><i>No products have been found</i></h2>
         </section>
     @endif
     @foreach ($products as $product)
@@ -62,8 +62,21 @@
                                         @csrf
                                         @method('delete')
                                         <x-dropdown-link :href="route('products.destroy', $product)" onclick="event.preventDefault(); 
-                                        this.closest('form').submit();">{{ __('Delete') }}</x-dropdown-link>
+                                        this.closest('form').submit();">{{ __('Delete product') }}</x-dropdown-link>
                                     </form>
+                                @if($product->user->blocked)
+                                    <form method="POST" action="{{ route('users.unblockUser', $product->user) }}">
+                                        @csrf
+                                        <x-dropdown-link :href="route('users.unblockUser', $product->user)" onclick="event.preventDefault(); 
+                                        this.closest('form').submit();">{{ __('Unblock user') }}</x-dropdown-link>
+                                    </form>
+                                @else
+                                    <form method="POST" action="{{ route('users.blockUser', $product->user) }}">
+                                        @csrf
+                                        <x-dropdown-link :href="route('users.unblockUser', $product->user)" onclick="event.preventDefault(); 
+                                        this.closest('form').submit();">{{ __('Block user') }}</x-dropdown-link>
+                                    </form>
+                                @endif
                                 </x-slot>
                             </x-dropdown>
                         </section>

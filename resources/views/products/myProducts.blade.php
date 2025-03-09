@@ -6,7 +6,7 @@
     </x-slot>
     @if($products->isEmpty())
         <section class="center">
-            <h2>You have no (pending) products</h2>
+            <h2><i>You have no (pending) products</i></h2>
         </section>
     @endif
     @foreach ($products as $product)
