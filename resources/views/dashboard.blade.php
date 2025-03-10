@@ -1,7 +1,5 @@
 <x-app-layout>
     <section class="filter-header" name="header">
-        <!-- <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2> -->
-        <!-- <h2 class="font-semibold text-xl text-gray-800 leading-tight">Filters</h2> -->
         <form method="GET" action="{{ route('dashboard') }}">
             @csrf
             <section class="filter">
@@ -9,9 +7,9 @@
                     <input type="text" name="search" placeholder="Search here for a product..." class="inputfield" style="width: 300px; margin: 0px" value="{{ request('search') }}"/>
                 </section>
                 <section style="display: inline-flex; align-items: center;">
-                    <section class="label">Category:</section>
-                    <select id="category" name="category" class="inputfield" style="margin-left: 0.5rem; margin-bottom: 0rem;" placeholder="test">
-                        <option selected>Choose a category</option>
+                    <!-- <section class="label">Category:</section> -->
+                    <select id="category" name="category" class="inputfield" style="margin-left: 0.5rem; margin-bottom: 0rem;">
+                        <option selected>Pick a category</option>
                         <option value="Gereedschap">Gereedschap</option>
                         <option value="Speelgoed">Speelgoed</option>
                         <option value="Meubel">Meubel</option>
