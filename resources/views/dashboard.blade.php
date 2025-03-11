@@ -87,11 +87,12 @@
                             @csrf
                             <button type="button" class="primary-button" style="margin: 4px 0px" onclick="openConfirmation({{ $product->id }})">Loan Product</button>
                             <section id="{{ $product->id }}" class="confirmation-popup">
-                                <p>Are you sure that you want to loan this product?<br>
-                                You will need to return the product before <b>{{$product->deadline}}</b>
-                                <button class="secondary-button" type="button" style="margin-top: 0.25rem" onclick="closeConfirmation({{ $product->id }})">Cancel</button>
-                                <button class="primary-button" type="submit" style="margin-top: 0.25rem">Confirm</button>
-                                </p>
+                                <p>Are you sure that you want to loan this product?
+                                You will need to return the product before <b>{{$product->deadline}}</b></p>
+                                <section>
+                                    <button class="secondary-button" type="button" style="margin-top: 0.25rem; margin-left: 1rem" onclick="closeConfirmation({{ $product->id }})">Cancel</button>
+                                    <button class="primary-button" type="submit" style="margin-top: 0.25rem; margin-right: 1rem">Confirm</button>
+                                </section>
                             </section>
                         </form>
                     @endif

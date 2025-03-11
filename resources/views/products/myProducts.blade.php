@@ -49,8 +49,8 @@
                             <section id="{{ $product->id }}" class="confirmation-popup">
                                 <p>Are you sure that you want to return this product?<br>
                                 You have until <b>{{$product->deadline}}</b> to return the product.<br>
-                                <button class="secondary-button" type="button" style="margin-top: 0.25rem" onclick="closeConfirmation({{ $product->id }})">Cancel</button>
-                                <button class="primary-button" type="submit" style="margin-top: 0.25rem">Confirm</button>
+                                <button class="secondary-button" type="button" style="margin: 0 0.25rem" onclick="closeConfirmation({{ $product->id }})">Cancel</button>
+                                <button class="primary-button" type="submit" style="margin: 0 0.25rem">Confirm</button>
                                 </p>
                             </section>
                         </form>

@@ -28,16 +28,15 @@ footer {
   height: 5rem;
   display: flex;
   max-width: 80rem;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 25vw;
+  margin-right: 25vw;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  justify-content: center;
+  justify-content: space-between;
   /* align-items: center; */
   /* flex-grow: 0; */
-  gap: 10rem;
 }
 
 /* @media (min-width: 640px) {
@@ -82,6 +81,9 @@ footer {
 .reviews-layout {
   display: flex;
   justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80vw;
   gap: 5vw;
   padding-top: 10px;
 }
@@ -208,12 +210,13 @@ footer {
   grid-template-areas:
     'header1 header2'
     'message message';
-  grid-template-columns: 50% 50%;
+  grid-template-columns: auto 300px;
   grid-template-rows: 5rem auto;
   border-radius: 8px;
   padding: 2px;
   row-gap: 3px;
-  width: 600px;
+  max-width: 600px;
+  min-width: 500px;
   background-color: #bcbebf;
   margin-inline: auto;
   margin-top: 20px;
@@ -282,20 +285,22 @@ label {
   display: none;
   position: absolute;
   inset: 0; /* Covers entire parent */
-  width: 50%;
-  height: 7rem;
+  width: 300px;
+  height: 10rem;
   margin-top: auto;
   margin-bottom: auto;
-  /* margin-top: 6rem; */
-  margin-left: 10%;
+  margin-left: auto;
+  margin-right: auto;
   padding-top: 0.5rem;
   background-color: white;
   border: 4px solid #bcbebf;
   border-radius: 8px;
   box-shadow: 0px 0px 20px 5px black;
+  font-size: 17px;
   /* #999c9f */
   text-align: center;
   justify-content: center;
+  flex-direction: column;
   z-index: 1;
 }
 
@@ -425,6 +430,26 @@ label {
   margin-top: 32%;
 }
 
+@media (max-width: 1250px) {
+  .header {
+    margin-left: auto;
+    margin-right: auto;
+    gap: 10vw;
+    justify-content: center;
+  }
+
+  .reviews-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80vw;
+    gap: 5vw;
+    padding-top: 10px;
+  }
+}
+
 @media (max-width: 1024px) {
   .filter-header {
     flex-direction: column;
@@ -471,6 +496,17 @@ label {
 }
 
 @media (max-width: 640px) {
+  .header {
+    margin-left: auto;
+    margin-right: auto;
+    gap: 5vw;
+    justify-content: center;
+  }
+
+  .header-button {
+    font-size: 1.2rem;
+  }
+
   .product-box {
     grid-template-areas:
       "header1"
@@ -500,6 +536,23 @@ label {
     height: 100%;
   }
 
+  .review-box {
+    display: grid;
+    grid-template-areas:
+      'header1'
+      'header2'
+      'message';
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    min-width: 300px;
+  }
+
+  .review-header1,
+  .review-header2,
+  .review-message {
+    border-radius: 8px;
+  }
+
   .inputfield {
     width: 100%;
   }
@@ -515,6 +568,10 @@ label {
 }
 
 @media (max-width: 550px) {
+  .header-button {
+    font-size: 1rem;
+  }
+
   .product-header1 {
     font-size: 14px;
   }
