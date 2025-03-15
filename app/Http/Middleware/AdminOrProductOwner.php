@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AdminOrProductOwner
 {
@@ -14,7 +15,7 @@ class AdminOrProductOwner
     {   
         $product = $request->route('product');
 
-        if (Auth::user()->admin or Auth::user()->id == $product->user_id){
+        if (Auth::user()->admin || Auth::user() == $product->owner){
             return $next($request);
         }
 

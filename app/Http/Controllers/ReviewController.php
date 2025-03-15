@@ -18,7 +18,7 @@ class ReviewController extends Controller
     public function index(): View
     {
         return view('myReviews', [
-            'reviews' => Review::with('reviewedUser')->latest()->get(),
+            'reviews' => Review::with('reviewedUser')->where('reviewed_user_id', auth()->id())->orWhere('reviewer_id', auth()->id())->latest()->get(),
             'products' => Product::with('user')->get()
         ]);
     }

@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index(): View
     {   
         return view('products.myProducts', [
-            'products' => Product::with('user')->latest()->get(),
+            'products' => Product::with('user')->where('user_id', auth()->id())->orWhere('loaner_id', auth()->id())->latest()->get(),
         ]);
     }
 
@@ -38,7 +38,7 @@ class ProductController extends Controller
 
     public function showPendingProducts(): View
     {   
-        $products = Product::with('user')->where('status', 'pending')->latest()->get();
+        $products = Product::with('user')->where('status', 'pending')->where('user_id', auth()->id())->orWhere('loaner_id', auth()->id())->latest()->get();
 
         return view('products.myProducts', [
             'products' => $products,

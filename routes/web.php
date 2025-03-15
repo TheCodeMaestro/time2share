@@ -7,11 +7,16 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {return view('welcome');})->name('welcome'); //function () {return view('welcome');} Was route naar welcome
+
 Route::middleware('auth', 'verified', 'isBlocked')->group(function () {
-    Route::get('/', function () {return view('welcome');});
     Route::get('/dashboard', [ProductController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
     Route::get('/products/myProducts', [ProductController::class, 'showPendingProducts'])->middleware(['auth', 'verified'])->name('showPendingProducts');
 });
+
+Route::delete('products/{product}', [ProductController::class, 'destroy'])
+    ->name('products.destroy')
+    ->middleware(['auth', 'verified', 'isBlocked', 'adminOrProductOwner']);
 
 Route::get('/blocked', [UserController::class, 'blocked'])->name('blocked');
 
@@ -32,10 +37,6 @@ Route::resource('reviews', ReviewController::class)
 Route::resource('products', ProductController::class)
     ->only(['index', 'store'])
     ->middleware(['auth', 'verified', 'isBlocked']);
-
-Route::delete('products/{product}', [ProductController::class, 'destroy'])
-    ->name('products.destroy')
-    ->middleware(['auth', 'verified', 'isBlocked', 'adminOrProductOwner']);
 
 Route::middleware('auth', 'verified', 'isBlocked')->group(function () {
     Route::post('/products/{product}/loan', [ProductController::class, 'loan'])->name('products.loan');
