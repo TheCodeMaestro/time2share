@@ -9,7 +9,7 @@
                 <section style="display: inline-flex; align-items: center;">
                     <!-- <section class="label">Category:</section> -->
                     <select id="category" name="category" class="inputfield" style="margin-left: 0.5rem; margin-bottom: 0rem;">
-                        <option selected>Pick a category</option>
+                        <option selected style="color: gray;">Pick a category</option>
                         <option value="Gereedschap">Gereedschap</option>
                         <option value="Speelgoed">Speelgoed</option>
                         <option value="Meubel">Meubel</option>

@@ -1,4 +1,6 @@
 <x-app-layout>
+    <x-slot name="header">
+    </x-slot>
     <section class="reviews-layout">
         <section>
             <h2 style="text-align: center">Received reviews</h2>

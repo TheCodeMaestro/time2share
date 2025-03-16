@@ -35,23 +35,7 @@ footer {
   padding-left: 1rem;
   padding-right: 1rem;
   justify-content: space-between;
-  /* align-items: center; */
-  /* flex-grow: 0; */
 }
-
-/* @media (min-width: 640px) {
-  .header {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .header {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-} */
 
 .filter-header {
   height: 5rem;
@@ -64,8 +48,6 @@ footer {
   padding-right: 1rem;
   justify-content: center;
   align-items: center;
-  /* align-items: center; */
-  /* flex-grow: 0; */
   gap: 1rem;
   background-color: white;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
@@ -93,23 +75,29 @@ footer {
   justify-content: space-between;
 }
 
+.welcome-box {
+  display: flex;
+  margin: auto;
+  margin-top: 30vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 25rem;
+  height: 40vh;
+  border: 0.25rem solid #bcbebf;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+
 .product-form {
   display: none;
   max-width: 42rem;
   margin-left: auto;
   margin-right: auto;
   padding: 1rem;
-  border: 4px solid #bcbebf;
-  border-radius: 8px;
+  border: 0.25rem solid #bcbebf;
+  border-radius: 0.5rem;
   background-color: #f5f5f5;
-
-  /* @media (min-width: 640px) {
-      padding: 1.5rem;
-  }
-
-  @media (min-width: 1024px) {
-      padding: 2rem;
-  } */
 }
 
 .review-form {
@@ -118,26 +106,10 @@ footer {
   margin-left: auto;
   margin-right: auto;
   padding: 1rem;
-  border: 4px solid #bcbebf;
-  border-radius: 8px;
+  border: 0.25rem solid #bcbebf;
+  border-radius: 0.5rem;
   background-color: #f5f5f5;
 }
-
-/* .product-box {
-  display: grid;
-  grid-template-areas:
-    'header1 header2'
-    'description image';
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 5rem auto;
-  border-radius: 8px;
-  padding: 4px;
-  row-gap: 4px;
-  width: 900px;
-  background-color: #bcbebf;
-  margin-inline: auto;
-  margin-top: 20px;
-} */
 
 .product-box {
   display: grid;
@@ -146,7 +118,7 @@ footer {
     'description image';
   grid-template-columns: 65% 35%;
   grid-template-rows: 5rem auto;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   padding: 2px;
   row-gap: 3px;
   width: 900px;
@@ -158,16 +130,16 @@ footer {
 
 .product-header1 {
   grid-area: header1;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
   background-color: white;
   padding-left: 10px;
 }
 
 .product-header2 {
   grid-area: header2;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
   background-color: white;
   padding-left: 5px;
   padding-top: 4px;
@@ -177,13 +149,10 @@ footer {
 
 .product-description {
   grid-area: description;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
   background-color: white;
   padding: 4px 10px;
-  /* padding-left: 10px;
-  padding-top: 4px;
-  padding-bottom: 4px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -191,8 +160,8 @@ footer {
 
 .product-image {
   grid-area: image;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
   background-color: rgb(244, 244, 244);
   display: flex;
   justify-content: center;
@@ -212,7 +181,7 @@ footer {
     'message message';
   grid-template-columns: auto 300px;
   grid-template-rows: 5rem auto;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   padding: 2px;
   row-gap: 3px;
   max-width: 600px;
@@ -225,16 +194,16 @@ footer {
 
 .review-header1 {
   grid-area: header1;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
   background-color: white;
   padding-left: 10px;
 }
 
 .review-header2 {
   grid-area: header2;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
   background-color: white;
   padding-left: 5px;
   padding-top: 4px;
@@ -244,7 +213,7 @@ footer {
 
 .review-message {
   grid-area: message;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   background-color: white;
   padding: 4px 10px;
   margin-right: 1px;
@@ -259,17 +228,10 @@ footer {
   margin-bottom: 20px;
   resize: none;
   border: 2px solid #bcbebf;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-
-  /* #description {
-    resize: none;
-  } */
-
-  /* overflow: hidden;
-  height: auto; */
 
   .inputfield:focus {
     border-color: #a5b4fc;
@@ -293,8 +255,8 @@ label {
   margin-right: auto;
   padding-top: 0.5rem;
   background-color: white;
-  border: 4px solid #bcbebf;
-  border-radius: 8px;
+  border: 0.25rem solid #bcbebf;
+  border-radius: 0.5rem;
   box-shadow: 0px 0px 20px 5px black;
   font-size: 17px;
   /* #999c9f */
@@ -329,8 +291,8 @@ label {
   margin-left: auto;
   margin-right: auto;
   padding: 1rem;
-  border: 4px solid #bcbebf;
-  border-radius: 8px;
+  border: 0.25rem solid #bcbebf;
+  border-radius: 0.5rem;
   background-color: #f5f5f5;
 }
 

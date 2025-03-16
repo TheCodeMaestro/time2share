@@ -13,7 +13,11 @@
         @if($product->owner->is(Auth::user()) Or $product->loaner_id == Auth::user()->id)
             <section class="product-box">
                 <section class="product-header1">
-                    <h2>{{ $product->name }}</h2>
+                    <h2>{{ $product->name }}
+                        @if($product->loaner_id == Auth::user()->id)
+                            - <i>Loaning</i>
+                        @endif
+                    </h2>
                     <p>Category: {{ $product->category }} | Deadline: {{ $product->deadline }}</p>
                 </section>
                 <section class="product-header2">
@@ -39,9 +43,7 @@
                                     </form>
                                 </x-slot>
                             </x-dropdown>
-                        </section>
-                    @else
-                        <section><p>loaning</p></section>    
+                        </section> 
                     @endif
 
                 </section>
