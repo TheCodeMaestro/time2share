@@ -7,7 +7,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {return view('welcome');})->name('welcome'); //function () {return view('welcome');} Was route naar welcome
+Route::get('/', function () {return view('welcome');})->name('welcome');
 
 Route::middleware('auth', 'verified', 'isBlocked')->group(function () {
     Route::get('/dashboard', [ProductController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
@@ -25,10 +25,6 @@ Route::middleware('auth', 'verified', 'isBlocked')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-Route::resource('chirps', ChirpController::class) //moet weg
-    ->only(['index', 'store', 'edit', 'update', 'destroy'])//moet weg
-    ->middleware(['auth', 'verified']);//moet weg
 
 Route::resource('reviews', ReviewController::class)
     ->only(['index', 'store', 'destroy'])

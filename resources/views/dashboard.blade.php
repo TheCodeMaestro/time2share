@@ -7,7 +7,6 @@
                     <input type="text" name="search" placeholder="Search here for a product..." class="inputfield" style="width: 300px; margin: 0px" value="{{ request('search') }}"/>
                 </section>
                 <section style="display: inline-flex; align-items: center;">
-                    <!-- <section class="label">Category:</section> -->
                     <select id="category" name="category" class="inputfield" style="margin-left: 0.5rem; margin-bottom: 0rem;">
                         <option selected style="color: gray;">Pick a category</option>
                         <option value="Gereedschap">Gereedschap</option>

@@ -88,8 +88,6 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review): RedirectResponse
     {   
-        //gate toevoegen (review policy)
-
         $review->delete();
  
         return redirect(route('reviews.index'));

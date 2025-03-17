@@ -6,9 +6,6 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <h2>Time2share</h2>
-                    <!-- <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
-                    </a> -->
                 </div>
 
                 <!-- Navigation Links -->
@@ -22,9 +19,6 @@
                     <x-nav-link :href="route('reviews.index')" :active="request()->routeIs('reviews.index')">
                         {{ __('My reviews') }}
                     </x-nav-link>
-                    <!-- <x-nav-link :href="route('chirps.index')" :active="request()->routeIs('chirps.index')">
-                        {{ __('Chirps') }}
-                    </x-nav-link> -->
                 </div>
             </div>
 
